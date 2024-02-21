@@ -1,8 +1,8 @@
 import { Fragment } from "react";
-import useCounter from "@/store/counter";
+import useStore from "@/store";
 
 export function Counter() {
-  const { count, inc, deep, incDeep } = useCounter();
+  const { count, inc, deep, incDeep } = useStore();
   return (
     <Fragment>
       <div className="inline-block p-2 border-red-950 border-x-2 border-y-2">
