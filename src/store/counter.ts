@@ -1,25 +1,34 @@
 import { create } from "zustand";
-
-interface Counter {
-  count: number;
-}
+import { produce } from "immer";
+import { Counter, DeepCounter } from "@/models/counter";
 
 interface CounterAction {
   inc: () => void;
+  incDeep: () => void;
 }
 
-export const useCounter = create<Counter & CounterAction>((set) => ({
+const useCounter = create<Counter & DeepCounter & CounterAction>((set) => ({
   count: 1,
-  inc() {
-    return set(({ count }) => ({ count: count + 1 }));
+  deep: {
+    nested: {
+      obj: { count: 1 },
+    },
   },
+  inc: () => set(({ count }) => ({ count: count + 1 })),
+  incDeep: () =>
+    //set 函数会默认把第一个参数就是上一个deepCounter 的值添加给produce 的第一参数,而produce 不会使用到所以就可以省略掉不写,而produce 的第二个参数是一个函数,用于生成新的state,其参数是新的一个值和之前一个deep 相同的draft;
+    set(
+      produce((draft_deep: DeepCounter) => {
+        ++draft_deep.deep.nested.obj.count;
+      })
+    ),
+  // incDeep: () => {
+  //   const action=(draft_deep:DeepCounter)=>{
+  //     ++draft_deep.deep.nested.obj.count;
+  //   }
+  //   const result = produce(action);
+  //   return set(result);
+  // },
 }));
 
-//虽然这种方法 易于代码组织,和便于拆分,但是zustand 还是建议使用上面的方式组织代码,因为这样 store 里面的逻辑就可以放在一起,方便其他组件的使用
-// function inc() {
-//   return useCounter.setState(({ count }) => ({ count: count + 1 }));
-// }
-
-// export const counterAction = {
-//   inc,
-// };
+export default useCounter;
