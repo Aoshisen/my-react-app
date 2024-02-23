@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { Bear as State } from "@/models/bear";
 import { StateCreator } from "zustand";
 import { BoundSlice } from ".";
-import { BearAction } from "./actions";
+import { BearAction } from "./_actions";
 interface Action {
   eatFish: () => void;
 }
@@ -20,8 +20,8 @@ const createBearSlice: StateCreator<
   BearSlice
 > = (set) => {
   function eatFish() {
-    const nextState = produce((draft_bear: State) => {
-      draft_bear.age += 1;
+    const nextState = produce((draft_bear: BearSlice) => {
+      ++draft_bear.age;
     });
     return set(nextState, false, BearAction.EAT_FISH);
   }

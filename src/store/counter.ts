@@ -2,7 +2,7 @@ import { StateCreator } from "zustand";
 import { produce } from "immer";
 import { Counter, DeepCounter } from "@/models/counter";
 import { BoundSlice } from ".";
-import { CounterAction } from "./actions";
+import { CounterAction } from "./_actions";
 
 interface Action {
   inc: () => void;
