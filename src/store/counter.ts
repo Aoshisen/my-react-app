@@ -1,15 +1,14 @@
-import { StateCreator } from "zustand";
 import { produce } from "immer";
 import { Counter, DeepCounter } from "@/models/counter";
-import { BoundSlice } from ".";
-import { CounterAction } from "./_actions";
-
-interface Action {
+import { CounterAction } from "@/const";
+import { StateCreatorHelper } from ".";
+type Action = {
   inc: () => void;
   incDeep: () => void;
-}
-
+};
 type State = Counter & DeepCounter;
+export type CounterSlice = State & Action;
+
 const INIT_STATE: State = {
   count: 1,
   deep: {
@@ -19,13 +18,7 @@ const INIT_STATE: State = {
   },
 };
 
-export type CounterSlice = State & Action;
-const createCounterSlice: StateCreator<
-  BoundSlice,
-  [["zustand/devtools", never]],
-  [],
-  CounterSlice
-> = (set) => {
+const createCounterSlice: StateCreatorHelper<CounterSlice> = (set) => {
   function inc() {
     const nextState = produce((draft_count: Counter) => {
       ++draft_count.count;

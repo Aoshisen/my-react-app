@@ -1,8 +1,7 @@
 import { produce } from "immer";
 import { Bear as State } from "@/models/bear";
-import { StateCreator } from "zustand";
-import { BoundSlice } from ".";
-import { BearAction } from "./_actions";
+import { StateCreatorHelper } from ".";
+import { BearAction } from "@/const";
 interface Action {
   eatFish: () => void;
 }
@@ -13,12 +12,7 @@ const INIT_STATE: State = {
 
 export type BearSlice = State & Action;
 
-const createBearSlice: StateCreator<
-  BoundSlice,
-  [["zustand/devtools", never]],
-  [],
-  BearSlice
-> = (set) => {
+const createBearSlice: StateCreatorHelper<BearSlice> = (set) => {
   function eatFish() {
     const nextState = produce((draft_bear: BearSlice) => {
       ++draft_bear.age;
