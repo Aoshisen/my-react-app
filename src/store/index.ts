@@ -16,9 +16,12 @@ const createStore = () => {
     };
   };
 
-  const enhanceStore = devtools(
-    immer(persist(combinedSlices, { name: "bound" }))
+  //开启了devtools 在google redux 插件里面就可以看到对应的数据变化；
+  const enhanceStore = immer(
+    devtools(persist(combinedSlices, { name: "bound" }))
   );
+
+  // const enhanceStore = immer(persist(combinedSlices, { name: "bound" }));
 
   return create(enhanceStore);
 };
