@@ -4,8 +4,9 @@ import createCounterSlice, { CounterSlice } from "./counter";
 import { persist, devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { STORE_NAME } from "@/const";
+import * as pkg from "../../package.json";
 
-type BoundSlice = BearSlice & CounterSlice;
+export type BoundSlice = BearSlice & CounterSlice;
 
 export type StateCreatorHelper<T> = StateCreator<
   BoundSlice,
@@ -20,7 +21,12 @@ const combinedSlices: StateCreator<BoundSlice> = (...argument) => ({
 });
 
 const enhanceStore = devtools(
-  immer(persist(combinedSlices, { name: STORE_NAME }))
+  immer(
+    persist(combinedSlices, {
+      name: STORE_NAME,
+      version: pkg.localStorage_version,
+    })
+  )
 );
 
 const useStore = create(enhanceStore);
