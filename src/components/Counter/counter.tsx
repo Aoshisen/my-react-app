@@ -15,10 +15,10 @@ export function Counter() {
         increase
       </button>
 
-      <div className="inline-block p-2 border-red-950 border-x-2 border-y-2">
+      <div className="inline-block p-2 border-red-950 border-x-2 border-y-2" role="counter-deep">
         {deep.nested.obj.count}
       </div>
-      <button onClick={incDeep}>increase Deep</button>
+      <button onClick={incDeep} role="increase-deep-btn">increase Deep</button>
     </Fragment>
   );
 }
