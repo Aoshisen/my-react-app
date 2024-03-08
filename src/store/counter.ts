@@ -1,12 +1,12 @@
 import { produce } from "immer";
 import { Counter, DeepCounter } from "@/models/counter";
 import { CounterAction } from "@/const";
-import { StateCreatorHelper } from ".";
-type Action = {
+import { StateCreatorHelper } from "@/helper/type";
+export type Action = {
   inc: () => void;
   incDeep: () => void;
 };
-type State = Counter & DeepCounter;
+export type State = Counter & DeepCounter;
 export type CounterSlice = State & Action;
 
 const INIT_STATE: State = {

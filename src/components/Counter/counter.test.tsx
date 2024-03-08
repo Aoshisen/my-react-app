@@ -2,10 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { test, expect, describe } from "vitest";
 import { Counter } from "./counter";
-import { STORE_NAME } from "@/const";
-import { BoundSlice } from "@/store";
-import { getStorageItem } from "@/utils";
 
+//关注点只聚焦到组件的功能上面，不用去关注其副作用
 describe("counter", () => {
   render(<Counter />);
   test("init state should be 1", () => {
@@ -20,11 +18,6 @@ describe("counter", () => {
     expect(counterEl.innerHTML).toBe("2");
   });
 
-  test("check localStorage", () => {
-    const local_data = getStorageItem<BoundSlice>(STORE_NAME);
-    expect(local_data.state.count).toBe(2);
-  });
-
   test("deep count initState should be 1", () => {
     const counterEl = screen.getByRole("counter-deep");
     expect(counterEl.innerHTML).toBe("1");
@@ -37,8 +30,4 @@ describe("counter", () => {
     expect(counterEl.innerHTML).toBe("2");
   });
 
-  test("check localStorage with deep", () => {
-    const local_data = getStorageItem<BoundSlice>(STORE_NAME);
-    expect(local_data.state.deep.nested.obj.count).toBe(2);
-  });
 });

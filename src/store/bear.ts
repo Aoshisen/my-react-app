@@ -1,17 +1,17 @@
 import { produce } from "immer";
-import { Bear as State } from "@/models/bear";
-import { StateCreatorHelper } from ".";
+import { Bear } from "@/models/bear";
 import { BearAction } from "@/const";
-interface Action {
+import { StateCreatorHelper } from "@/helper/type";
+export type Action = {
   eatFish: () => void;
-}
+};
+export type State = Bear;
+export type BearSlice = State & Action;
+
 const INIT_STATE: State = {
   name: "",
   age: 0,
 };
-
-export type BearSlice = State & Action;
-
 const createBearSlice: StateCreatorHelper<BearSlice> = (set) => {
   function eatFish() {
     const nextState = produce((draft_bear: BearSlice) => {

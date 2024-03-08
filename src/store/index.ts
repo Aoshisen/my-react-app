@@ -1,19 +1,12 @@
 import { StateCreator, create } from "zustand";
-import createBearSlice, { BearSlice } from "./bear";
-import createCounterSlice, { CounterSlice } from "./counter";
+import createBearSlice from "./bear";
+import createCounterSlice from "./counter";
 import { persist, devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { STORE_NAME } from "@/const";
 import * as pkg from "../../package.json";
+import { BoundSlice } from "@/helper/type";
 
-export type BoundSlice = BearSlice & CounterSlice;
-
-export type StateCreatorHelper<T> = StateCreator<
-  BoundSlice,
-  [["zustand/devtools", never]],
-  [],
-  T
->;
 
 const combinedSlices: StateCreator<BoundSlice> = (...argument) => ({
   ...createBearSlice.apply(this, argument),
