@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { test, expect, describe } from "vitest";
-import { Counter } from "./counter";
+import { Counter }  from "@/components";
 
 //关注点只聚焦到组件的功能上面，不用去关注其副作用
 describe("counter", () => {

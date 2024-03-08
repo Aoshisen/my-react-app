@@ -1,1 +1,1 @@
-export * from "./Counter/counter";
+export * from "./Counter";

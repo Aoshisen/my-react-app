@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { Counter, DeepCounter } from "@/models/counter";
-import { CounterAction } from "@/const";
+import { CounterAction } from "@/const/actions";
 import { StateCreatorHelper } from "@/helper/type";
 export type Action = {
   inc: () => void;

@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { Bear } from "@/models/bear";
-import { BearAction } from "@/const";
+import { BearAction } from "@/const/actions";
 import { StateCreatorHelper } from "@/helper/type";
 export type Action = {
   eatFish: () => void;

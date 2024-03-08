@@ -3,7 +3,7 @@ import createBearSlice from "./bear";
 import createCounterSlice from "./counter";
 import { persist, devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { STORE_NAME } from "@/const";
+import { STORE_NAME } from "@/const/name";
 import * as pkg from "../../package.json";
 import { BoundSlice } from "@/helper/type";
 
