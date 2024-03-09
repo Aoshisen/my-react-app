@@ -1,6 +1,6 @@
 import React from "react";
 import { useScroll } from "./hooks/scroll";
-import { Counter, Quantity } from "./components";
+import { Counter, Quantity,D3Test } from "./components";
 import PhoneIcon from "./assets/icons/phone.svg?react";
 
 export default function App() {
@@ -15,6 +15,7 @@ export default function App() {
         <Counter />
       </div>
       <Quantity></Quantity>
+      <D3Test />
     </React.Fragment>
   );
 }
